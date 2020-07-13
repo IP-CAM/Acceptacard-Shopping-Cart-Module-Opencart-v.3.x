@@ -1,7 +1,23 @@
 <modification>
-    <name>Acceptacard Payment Gateway</name>
-    <code>acceptacard_payment_gateway</code>
+    <name>PayaCardServices Payment Gateway</name>
+    <code>payacardservices_payment_gateway</code>
     <version>0.1.0</version>
     <author>Acceptacard Ltd</author>
-    <link>https://www.acceptacard.co.uk</link>
+    <link>https://www.payacardservices.com</link>
+    <file path="catalog/controller/checkout/payment_method.php">
+        <operation>
+            <search>
+                <![CDATA[$data['payment_methods'] = $this->session->data['payment_methods'];]]>
+            </search>
+            <add position="after"><![CDATA[
+					/* Code for payatrader Message by @author ASHEESH SINGH*/
+					// START
+					if(isset($data['payment_methods']['payatrader'])){
+						$data['payment_methods']['payatrader']['title'] = '<img title="Paya Card Services card payments made easy" alt="'.$data['payment_methods']['payatrader']['title'].'" src="admin/view/image/payment/payatrader.jpg" />'. ' Pay<span style="color: #AED674;"><b>a</b></span> Card Services';
+					}
+					// END
+				   ]]>
+            </add>
+        </operation>
+    </file>
 </modification>
