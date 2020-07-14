@@ -66,7 +66,7 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 				$transaction['amount'] = $amount;
 
 				if(isset($data['transaction_status']) && $data['transaction_status'] == 'A'){
-					$status = $this->model_payment_payatrader->addTransaction($transaction);	
+					$status = $this->model_extension_payment_payatrader->addTransaction($transaction);
 				}
 			}
 		} else {
@@ -80,10 +80,10 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 			$ono =  $this->request->get['ono'];
 			$this->load->model('extension/payment/payatrader');
 			$this->load->model('checkout/order');
-			$transaction = $this->model_payment_payatrader->getTransaction($ono);
+			$transaction = $this->model_extension_payment_payatrader->getTransaction($ono);
 			/* print_r($transaction); */
 			if(isset($transaction['customer_transaction_id']) && $transaction['customer_transaction_id']){
-				$this->model_payment_payatrader->deleteTransaction($transaction['customer_transaction_id']);
+				$this->model_extension_payment_payatrader->deleteTransaction($transaction['customer_transaction_id']);
 				$this->model_checkout_order->addOrderHistory($ono, $this->config->get('payatrader_order_status_id'));
 				$response = print_r($this->request->get,true);
 				$this->log->write('A Thanks Success Response for Payatrader:{{'.$response.'}}');

@@ -11,11 +11,11 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 			
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_setting_setting->editSetting('payatrader', $this->request->post);
-			$this->load->model('extension/payment/payatrader');
-			if($this->request->post['payatrader_status']) {	
-				$this->model_payment_payatrader->install();
+            $this->load->model('extension/payment/payatrader');
+			if($this->request->post['payatrader_status']) {
+				$this->model_extension_payment_payatrader->install();
 			} else {
-				$this->model_payment_payatrader->uninstall();
+				$this->model_extension_payment_payatrader->uninstall();
 			}
 			$this->session->data['success'] = $this->language->get('text_success');
 			$this->response->redirect($this->url->link('extension/payment', 'user_token=' . $this->session->data['user_token'], 'SSL'));
