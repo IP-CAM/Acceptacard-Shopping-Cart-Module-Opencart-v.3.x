@@ -10,15 +10,15 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 		$this->load->model('setting/setting');
 			
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('payatrader', $this->request->post);
+			$this->model_setting_setting->editSetting('payment_payatrader', $this->request->post);
             $this->load->model('extension/payment/payatrader');
-			if($this->request->post['payatrader_status']) {
-				$this->model_extension_payment_payatrader->install();
-			} else {
-				$this->model_extension_payment_payatrader->uninstall();
-			}
+//			if($this->request->post['payatrader_status']) {
+//				$this->model_extension_payment_payatrader->install();
+//			} else {
+//				$this->model_extension_payment_payatrader->uninstall();
+//			}
 			$this->session->data['success'] = $this->language->get('text_success');
-			$this->response->redirect($this->url->link('extension/payment', 'user_token=' . $this->session->data['user_token'], 'SSL'));
+			$this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], 'SSL'));
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -74,7 +74,7 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_payment'),
-			'href'      => $this->url->link('extension/payment', 'user_token=' . $this->session->data['user_token'], 'SSL'),
+			'href'      => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], 'SSL'),
       		'separator' => ' :: '
    		);
 
@@ -86,7 +86,7 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 				
 		$data['action'] = $this->url->link('extension/payment/payatrader', 'user_token=' . $this->session->data['user_token'], 'SSL');
 		
-		$data['cancel'] = $this->url->link('extension/payment', 'user_token=' . $this->session->data['user_token'], 'SSL');
+		$data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], 'SSL');
 		
 		if (isset($this->request->post['payatrader_site_code'])) {
 			$data['payatrader_site_code'] = $this->request->post['payatrader_site_code'];
@@ -162,6 +162,12 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 
 		$this->response->setOutput($this->load->view('extension/payment/payatrader', $data));
 	}
+
+	public function install()
+    {
+        $this->load->model('extension/payment/payatrader');
+        $this->model_extension_payment_payatrader->install();
+    }
 
 	private function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/payment/payatrader')) {

@@ -4,76 +4,42 @@ class ModelExtensionPaymentPayatrader extends Model {
 	protected $_searchTitle = 'Acceptacard Modification for Paya Card Services';
 	
 	public function install($version = '1.0.0') {
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "modification` WHERE `name` LIKE '%".$this->_searchTitle."%' AND `version` = '".$version."'");
-		if(!$query->row) {
-			$file = DIR_DOWNLOAD .'payatrader.xml';
-			$this->load->model('extension/modification');
+        $this->db->query("
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "payatrader_remote_order` (
+			  `payatrader_remote_order_id` INT(11) NOT NULL AUTO_INCREMENT,
+			  `order_id` INT(11) NOT NULL,
+			  `order_ref` CHAR(50) NOT NULL,
+			  `order_ref_previous` CHAR(50) NOT NULL,
+			  `pasref` VARCHAR(50) NOT NULL,
+			  `pasref_previous` VARCHAR(50) NOT NULL,
+			  `date_added` DATETIME NOT NULL,
+			  `date_modified` DATETIME NOT NULL,
+			  `capture_status` INT(1) DEFAULT NULL,
+			  `void_status` INT(1) DEFAULT NULL,
+			  `settle_type` INT(1) DEFAULT NULL,
+			  `rebate_status` INT(1) DEFAULT NULL,
+			  `currency_code` CHAR(3) NOT NULL,
+			  `authcode` VARCHAR(30) NOT NULL,
+			  `account` VARCHAR(30) NOT NULL,
+			  `total` DECIMAL( 10, 2 ) NOT NULL,
+			  PRIMARY KEY (`payatrader_remote_order_id`)
+			) ENGINE=MyISAM DEFAULT COLLATE=utf8_general_ci;");
 
-			// If xml file just put it straight into the DB
-			$xml = file_get_contents($file);
+        $this->db->query("
+			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "payatrader_remote_order_transaction` (
+			  `payatrader_remote_order_transaction_id` INT(11) NOT NULL AUTO_INCREMENT,
+			  `payatrader_remote_order_id` INT(11) NOT NULL,
+			  `date_added` DATETIME NOT NULL,
+			  `type` ENUM('auth', 'payment', 'rebate', 'void') DEFAULT NULL,
+			  `amount` DECIMAL( 10, 2 ) NOT NULL,
+			  PRIMARY KEY (`payatrader_remote_order_transaction_id`)
+			) ENGINE=MyISAM DEFAULT COLLATE=utf8_general_ci;");
 
-			if ($xml) {
-				try {
-					$dom = new DOMDocument('1.0', 'UTF-8');
-					$dom->loadXml($xml);
-
-					$name = $dom->getElementsByTagName('name')->item(0);
-
-					if ($name) {
-						$name = $name->nodeValue;
-					} else {
-						$name = $dom->getElementsByTagName('id')->item(0);
-						if ($name) {
-							$name = $name->nodeValue;
-						} else {
-							$name = '';
-						}
-					}
-
-					$author = $dom->getElementsByTagName('author')->item(0);
-
-					if ($author) {
-						$author = $author->nodeValue;
-					} else {
-						$author = '';
-					}
-
-					$version = $dom->getElementsByTagName('version')->item(0);
-
-					if ($version) {
-						$version = $version->nodeValue;
-					} else {
-						$version = '';
-					}
-
-					$link = $dom->getElementsByTagName('link')->item(0);
-
-					if ($link) {
-						$link = $link->nodeValue;
-					} else {
-						$link = '';
-					}
-
-					$modification_data = array(
-						'name'       => $this->_searchTitle,
-						'author'     => $author,
-						'version'    => $version,
-						'link'       => $link,
-						'code'       => $xml,
-						'status'     => 1
-					);
-
-					$this->model_extension_modification->addModification($modification_data);
-					return true;
-				} catch(Exception $exception) {
-					return false;
-				}
-			}
-		}
 		return true;
 	}
 
-	public function uninstall($version = '1.0.0') {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "modification` WHERE `name` LIKE '%".$this->_searchTitle."%' AND `version` = '".$version."'");
-	}
+//	public function uninstall($version = '1.0.0') {
+//	    $this->db->query("DROP TABLE `" . DB_PREFIX . "payatrader_remote_order`");
+//		$this->db->query("DELETE FROM `" . DB_PREFIX . "modification` WHERE `name` LIKE '%".$this->_searchTitle."%' AND `version` = '".$version."'");
+//	}
 }

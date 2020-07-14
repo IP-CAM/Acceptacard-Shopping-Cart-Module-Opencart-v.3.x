@@ -29,7 +29,7 @@
 		  <div class="form-group">
             <label class="col-sm-2 control-label" for="input-site-code">{{ entry_site_code }}</label>
             <div class="col-sm-10">
-              <input type="text" name="payatrader_site_code" value="{{ payatrader_site_code }}"  id="input-site-code" class="form-control" />
+              <input type="text" name="payment_payatrader_site_code" value="{{ payatrader_site_code }}"  id="input-site-code" class="form-control" />
               {% if error_site_code %}
               <span class="text-danger">{{ error_site_code }}</span>
               {% endif %}
@@ -39,7 +39,7 @@
 		  <div class="form-group">
             <label class="col-sm-2 control-label" for="input-posturl">{{ entry_posturl }}</label>
             <div class="col-sm-10">
-              <input size="85" type="text" name="payatrader_posturl" value="{{ payatrader_posturl }}" id="input-posturl" class="form-control" />
+              <input size="85" type="text" name="payment_payatrader_posturl" value="{{ payatrader_posturl }}" id="input-posturl" class="form-control" />
               {% if error_posturl %}
                 <span class="text-danger">{{ error_posturl }}</span>
               {% endif %}
@@ -49,21 +49,21 @@
 		  <div class="form-group">
             <label class="col-sm-2 control-label" for="input-traderdispalname">{{ entry_traderdispalname }}</label>
             <div class="col-sm-10">
-              <input type="text" name="payatrader_traderdispalname" value="{{ payatrader_traderdispalname }}" placeholder="{{ entry_traderdispalname }}" id="input-traderdispalname" class="form-control" />
+              <input type="text" name="payment_payatrader_traderdispalname" value="{{ payatrader_traderdispalname }}" placeholder="{{ entry_traderdispalname }}" id="input-traderdispalname" class="form-control" />
             </div>
           </div>
 		  
 		  <div class="form-group">
             <label class="col-sm-2 control-label" for="input-total">{{ entry_total }}</label>
             <div class="col-sm-10">
-              <input type="text" name="payatrader_total" value="{{ payatrader_total }}" id="input-total" class="form-control" />
+              <input type="text" name="payment_payatrader_total" value="{{ payatrader_total }}" id="input-total" class="form-control" />
             </div>
           </div>
 		  
 		  <div class="form-group">
             <label class="col-sm-2 control-label" for="input-order-status">{{ entry_order_status }}</label>
             <div class="col-sm-10">
-              <select name="payatrader_order_status_id" id="input-order-status" class="form-control">
+              <select name="payment_payatrader_order_status_id" id="input-order-status" class="form-control">
                 {% for order_status in order_statuses %}
                   {% if order_status['order_status_id'] == payatrader_order_status_id %}
                   <option value="{{ order_status['order_status_id'] }}" selected="selected">{{ order_status['name'] }}</option>
@@ -78,7 +78,7 @@
 		  <div class="form-group">
             <label class="col-sm-2 control-label" for="input-geo-zone">{{ entry_geo_zone }}</label>
             <div class="col-sm-10">
-              <select name="payatrader_geo_zone_id" id="input-geo-zone" class="form-control">
+              <select name="payment_payatrader_geo_zone_id" id="input-geo-zone" class="form-control">
                 <option value="0">{{ text_all_zones }}</option>
                 {% for geo_zone in geo_zones %}
                   {% if geo_zone['geo_zone_id'] == payatrader_geo_zone_id %}
@@ -94,7 +94,7 @@
 		  <div class="form-group">
             <label class="col-sm-2 control-label" for="input-email-alert">{{ entry_email_alert }}</label>
             <div class="col-sm-10">
-              <select name="payatrader_email_alert" id="input-email-alert" class="form-control">
+              <select name="payment_payatrader_email_alert" id="input-email-alert" class="form-control">
 				<option value="n" {% if payatrader_email_alert == 'n' %} selected="selected" {% endif %}>{{ text_no }}</option>
 				<option value="y" {% if payatrader_email_alert == 'y' %} selected="selected" {% endif %}>{{ text_yes }}</option>
               </select>
@@ -104,7 +104,7 @@
 		  <div class="form-group">
             <label class="col-sm-2 control-label" for="input-forceshow">{{ entry_forceshow }}</label>
             <div class="col-sm-10">
-              <select name="payatrader_forceshow" id="input-forceshow" class="form-control">
+              <select name="payment_payatrader_forceshow" id="input-forceshow" class="form-control">
                 <option value="n" {% if payatrader_forceshow == 'n' %} selected="selected" {% endif %}>{{ text_no }}</option>
                 <option value="y" {% if payatrader_forceshow == 'y' %} selected="selected" {% endif %}>{{ text_yes }}</option>
               </select>
@@ -114,7 +114,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
             <div class="col-sm-10">
-              <select name="payatrader_status" id="input-status" class="form-control">
+              <select name="payment_payatrader_status" id="input-status" class="form-control">
                 {% if payatrader_status %}
                   <option value="1" selected="selected">{{ text_enabled }}</option>
                   <option value="0">{{ text_disabled }}</option>
@@ -128,7 +128,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-sort-order">{{ entry_sort_order }}</label>
             <div class="col-sm-10">
-              <input type="text" name="payatrader_sort_order" value="{{ payatrader_sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control" />
+              <input type="text" name="payment_payatrader_sort_order" value="{{ payatrader_sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control" />
             </div>
           </div>
         </form>

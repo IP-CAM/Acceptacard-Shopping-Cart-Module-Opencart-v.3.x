@@ -1,11 +1,11 @@
 <?php
 // Heading
-$_['heading_title']      = 'Pay<span style="color: #AED674;"><b>a</b></span> Card Services';
-$_['edit_title']      = 'Edit Pay<span style="color: #AED674;"><b>a</b></span> Card Services';
+$_['heading_title']      = 'PayaCardServices';
+$_['edit_title']      = 'Edit PayaCardServices';
 // Text 
 $_['text_payment']       = 'Payment';
 $_['text_payatrader']        = '<a onclick="window.open(\'http//www.payatrader.com/why_for_householders_1.php\');"><img src="view/image/payment/payatrader.jpg" alt="Payatrader" title="Payatrader" style="border 1px solid #EEEEEE;" /></a>';
-$_['text_success']       = 'Success You have modified Pay<span style="color: #AED674;"><b>a</b></span> Card Services account details!';
+$_['text_success']       = 'Success You have modified PayaCardServices account details!';
 $_['text_yes']			= "Yes";
 $_['text_no']			= "No";     
 // Entry
@@ -21,7 +21,7 @@ $_['entry_status']       		= 'Status';
 $_['entry_sort_order']   		= 'Sort Order';
 
 // Error
-$_['error_permission']   = 'Warning You do not have permission to modify payment Pay<span style="color #AED674;"><b>a</b></span> Card Services!';
+$_['error_permission']   = 'Warning You do not have permission to modify payment PayaCardServices!';
 $_['error_site_code']     = 'Merchant ID Required!';
 $_['error_security']     = 'Security Code Required!';
 ?>
