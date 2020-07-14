@@ -3,11 +3,11 @@ class ModelExtensionPaymentPayatrader extends Model {
   	public function getMethod($address, $total) {
 		$this->load->language('payment/payatrader');
 		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('payatrader_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('payment_payatrader_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
 		
-		if ($this->config->get('payatrader_total') > $total) {
+		if ($this->config->get('payment_payatrader_total') > $total) {
 			$status = false;
-		} elseif (!$this->config->get('payatrader_geo_zone_id')) {
+		} elseif (!$this->config->get('payment_payatrader_geo_zone_id')) {
 			$status = true;
 		} elseif ($query->num_rows) {
 			$status = true;
@@ -15,7 +15,7 @@ class ModelExtensionPaymentPayatrader extends Model {
 			$status = false;
 		}
 		if($status){
-			if($this->currency->getCode()!= 'GBP' && !$this->config->get('payatrader_forceshow'))
+            if($this->cart->customer->request->request['currency'] != 'GBP' && !$this->config->get('payment_payatrader_forceshow'))
 				$status = false;
 		}
 		
@@ -23,10 +23,10 @@ class ModelExtensionPaymentPayatrader extends Model {
 	
 		if ($status) {  
       		$method_data = array( 
-        		'code'       => 'payatrader',
+        		'code'       => 'payment_payatrader',
         		'title'      => $this->language->get('text_title'),
 				'terms'      => '',
-				'sort_order' => $this->config->get('payatrader_sort_order')
+				'sort_order' => $this->config->get('payment_payatrader_sort_order')
       		);
     	}
    
