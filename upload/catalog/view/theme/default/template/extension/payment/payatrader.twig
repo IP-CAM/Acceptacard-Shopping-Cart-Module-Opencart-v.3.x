@@ -1,23 +1,23 @@
-<form action="<?php echo $action; ?>" method="post">
-  <input type="hidden" name="site_code" value="<?php echo $site_code; ?>" />
-  <input type="hidden" name="site_url" value="<?php echo $site_url; ?>" />
-  <input type="hidden" name="posturl" value="<?php echo $posturl; ?>" />
-  <input type="hidden" name="returnurl" value="<?php echo $returnurl; ?>" />
-  <input type="hidden" name="traderdisplayname" value="<?php echo $traderdisplayname; ?>" />
-  <input type="hidden" name="customer_name" value="<?php echo $customer_name; ?>" />
-  <input type="hidden" name="customer_email" value="<?php echo $customer_email; ?>" />
-  <input type="hidden" name="customer_telephone" value="<?php echo $customer_telephone; ?>" />
-  <input type="hidden" name="customer_postcode" value="<?php echo $customer_postcode; ?>" />
-  <input type="hidden" name="customer_house_name_or_number" value="<?php echo $customer_house_name_or_number; ?>" />
-  <input type="hidden" name="transaction_value_pence" value="<?php echo $transaction_value_pence; ?>" />
-  <input type="hidden" name="order_number" value="<?php echo $order_number; ?>" />
-  <input type="hidden" name="email_alert" value="<?php echo $email_alert; ?>" />
+<form action="{{ action }}" method="post">
+  <input type="hidden" name="site_code" value="{{ site_code }}" />
+  <input type="hidden" name="site_url" value="{{ site_url }}" />
+  <input type="hidden" name="posturl" value="{{ posturl }}" />
+  <input type="hidden" name="returnurl" value="{{ returnurl }}" />
+  <input type="hidden" name="traderdisplayname" value="{{ traderdisplayname }}" />
+  <input type="hidden" name="customer_name" value="{{ customer_name }}" />
+  <input type="hidden" name="customer_email" value="{{ customer_email }}" />
+  <input type="hidden" name="customer_telephone" value="{{ customer_telephone }}" />
+  <input type="hidden" name="customer_postcode" value="{{ customer_postcode }}" />
+  <input type="hidden" name="customer_house_name_or_number" value="{{ customer_house_name_or_number }}" />
+  <input type="hidden" name="transaction_value_pence" value="{{ transaction_value_pence }}" />
+  <input type="hidden" name="order_number" value="{{ order_number }}" />
+  <input type="hidden" name="email_alert" value="{{ email_alert }}" />
   <input type="hidden" name="cart_type" value="opencart">
-  <input type="hidden" name="cart_version" value="<?php echo VERSION; ?>">
-  <input type="hidden" name="module_version" value="<?php echo $module_version; ?>">
+  <input type="hidden" name="cart_version" value="{{ oc_version }}">
+  <input type="hidden" name="module_version" value="{{ module_version }}">
   <div class="buttons">
     <div class="pull-right">
-      <input type="submit" value="<?php echo $button_confirm; ?>" class="btn btn-primary" />
+      <input type="submit" value="{{ button_confirm }}" class="btn btn-primary" />
     </div>
   </div>
 </form>

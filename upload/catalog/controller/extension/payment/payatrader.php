@@ -27,7 +27,7 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 		$data['email_alert']						= $this->config->get('payatrader_email_alert');
 		$data['module_version']						= $this->version;
 
-		
+		$data['oc_version'] = VERSION;
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/extension/payment/payatrader')) {
 			return $this->load->view($this->config->get('config_template') . '/template/extension/payment/payatrader', $data);
