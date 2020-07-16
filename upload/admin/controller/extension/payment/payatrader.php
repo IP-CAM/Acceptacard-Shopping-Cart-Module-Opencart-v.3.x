@@ -91,43 +91,43 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 		if (isset($this->request->post['payment_payatrader_site_code'])) {
 			$data['payment_payatrader_site_code'] = $this->request->post['payment_payatrader_site_code'];
 		} else {
-			$data['payment_payatrader_site_code'] = $this->config->get('payatrader_site_code');
+			$data['payment_payatrader_site_code'] = $this->config->get('payment_payatrader_site_code');
 		}
 
 		if (isset($this->request->post['payment_payatrader_posturl'])) {
 			$data['payment_payatrader_posturl'] = $this->request->post['payment_payatrader_posturl'];
 		} else {
-			$data['payment_payatrader_posturl'] = $this->config->get('payatrader_posturl');
+			$data['payment_payatrader_posturl'] = $this->config->get('payment_payatrader_posturl');
 		}
 		
 		if (isset($this->request->post['payment_payatrader_traderdispalname'])) {
 			$data['payment_payatrader_traderdispalname'] = $this->request->post['payment_payatrader_traderdispalname'];
 		} else {
-			$data['payment_payatrader_traderdispalname'] = $this->config->get('payatrader_traderdispalname');
+			$data['payment_payatrader_traderdispalname'] = $this->config->get('payment_payatrader_traderdispalname');
 		}
 		
 		if (isset($this->request->post['payment_payatrader_email_alert'])) {
 			$data['payment_payatrader_email_alert'] = $this->request->post['payment_payatrader_email_alert'];
 		} else {
-			$data['payment_payatrader_email_alert'] = $this->config->get('payatrader_email_alert');
+			$data['payment_payatrader_email_alert'] = $this->config->get('payment_payatrader_email_alert');
 		}
 		
 		if (isset($this->request->post['payment_payatrader_forceshow'])) {
 			$data['payment_payatrader_forceshow'] = $this->request->post['payment_payatrader_forceshow'];
 		} else {
-			$data['payment_payatrader_forceshow'] = $this->config->get('payatrader_forceshow');
+			$data['payment_payatrader_forceshow'] = $this->config->get('payment_payatrader_forceshow');
 		}
 		
 		if (isset($this->request->post['payment_payatrader_total'])) {
 			$data['payment_payatrader_total'] = $this->request->post['payment_payatrader_total'];
 		} else {
-			$data['payment_payatrader_total'] = $this->config->get('payatrader_total');
+			$data['payment_payatrader_total'] = $this->config->get('payment_payatrader_total');
 		} 
 				
 		if (isset($this->request->post['payment_payatrader_order_status_id'])) {
 			$data['payment_payatrader_order_status_id'] = $this->request->post['payment_payatrader_order_status_id'];
 		} else {
-			$data['payment_payatrader_order_status_id'] = $this->config->get('payatrader_order_status_id');
+			$data['payment_payatrader_order_status_id'] = $this->config->get('payment_payatrader_order_status_id');
 		} 
 		
 		$this->load->model('localisation/order_status');
@@ -137,7 +137,7 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 		if (isset($this->request->post['payment_payatrader_geo_zone_id'])) {
 			$data['payment_payatrader_geo_zone_id'] = $this->request->post['payment_payatrader_geo_zone_id'];
 		} else {
-			$data['payment_payatrader_geo_zone_id'] = $this->config->get('payatrader_geo_zone_id');
+			$data['payment_payatrader_geo_zone_id'] = $this->config->get('payment_payatrader_geo_zone_id');
 		} 
 
 		$this->load->model('localisation/geo_zone');
@@ -147,13 +147,13 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 		if (isset($this->request->post['payment_payatrader_status'])) {
 			$data['payment_payatrader_status'] = $this->request->post['payment_payatrader_status'];
 		} else {
-			$data['payment_payatrader_status'] = $this->config->get('payatrader_status');
+			$data['payment_payatrader_status'] = $this->config->get('payment_payatrader_status');
 		}
 		
 		if (isset($this->request->post['payment_payatrader_sort_order'])) {
 			$data['payment_payatrader_sort_order'] = $this->request->post['payment_payatrader_sort_order'];
 		} else {
-			$data['payment_payatrader_sort_order'] = $this->config->get('payatrader_sort_order');
+			$data['payment_payatrader_sort_order'] = $this->config->get('payment_payatrader_sort_order');
 		}
 
 		$data['header'] = $this->load->controller('common/header');

@@ -1,7 +1,7 @@
 <?php 
 class ModelExtensionPaymentPayatrader extends Model {
   	public function getMethod($address, $total) {
-		$this->load->language('payment/payatrader');
+		$this->load->language('extension/payment/payatrader');
 		
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('payment_payatrader_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
 		
@@ -23,13 +23,13 @@ class ModelExtensionPaymentPayatrader extends Model {
 	
 		if ($status) {  
       		$method_data = array( 
-        		'code'       => 'payment_payatrader',
+        		'code'       => 'payatrader',
         		'title'      => $this->language->get('text_title'),
 				'terms'      => '',
 				'sort_order' => $this->config->get('payment_payatrader_sort_order')
       		);
     	}
-   
+
     	return $method_data;
   	}
 	
