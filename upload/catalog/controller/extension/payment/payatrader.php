@@ -1,7 +1,7 @@
 <?php
 class ControllerExtensionPaymentPayatrader extends Controller {
 
-	private $version = '1.1';
+	private $version = '1.2';
 	public function index() {
 		
 		$data['button_confirm'] = $this->language->get('button_confirm');
@@ -10,22 +10,22 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 		
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 		
-		$data['action'] = $this->config->get('payatrader_posturl');
+		$data['action'] = $this->config->get('payment_payatrader_posturl');
 
-		$data['site_code'] 						= $this->config->get('payatrader_site_code');
-		$data['site_url']  						= HTTPS_SERVER;
-		$data['posturl']   						= $this->url->link('extension/payment/payatrader/shakehand','','SSL');
-		$data['returnurl'] 						= HTTPS_SERVER."payatrader_success.php";
-		$data['traderdisplayname'] 				= $this->config->get('payatrader_traderdispalname');
-		$data['customer_name'] 					= $order_info['payment_firstname']. ' '. $order_info['payment_lastname'];
-		$data['customer_email'] 					= $order_info['email'];
-		$data['customer_telephone'] 				= $order_info['telephone'];
-		$data['customer_postcode'] 				= $order_info['payment_postcode'];
-		$data['customer_house_name_or_number'] 	= $order_info['payment_address_1'].' '.$order_info['payment_address_2'].' , '.$order_info['payment_city'].' , '.$order_info['payment_zone'].' , '.$order_info['payment_country'];
-		$data['transaction_value_pence'] 			= number_format($this->currency->getValue('GBP') * $order_info['total'],2,'.','')*100;
-		$data['order_number']						= $order_info['order_id'];
-		$data['email_alert']						= $this->config->get('payatrader_email_alert');
-		$data['module_version']						= $this->version;
+		$data['site_code']                      = $this->config->get('payment_payatrader_site_code');
+		$data['site_url']                       = HTTPS_SERVER;
+		$data['posturl']                        = $this->url->link('extension/payment/payatrader/shakehand','','SSL');
+		$data['returnurl']                      = $this->url->link('extension/payment/payatrader/thanks','','SSL');
+		$data['traderdisplayname']              = $this->config->get('payment_payatrader_traderdispalname');
+		$data['customer_name']                  = $order_info['payment_firstname']. ' '. $order_info['payment_lastname'];
+		$data['customer_email']                 = $order_info['email'];
+		$data['customer_telephone']             = $order_info['telephone'];
+		$data['customer_postcode']              = $order_info['payment_postcode'];
+		$data['customer_house_name_or_number']  = $order_info['payment_address_1'].' '.$order_info['payment_address_2'].' , '.$order_info['payment_city'].' , '.$order_info['payment_zone'].' , '.$order_info['payment_country'];
+		$data['transaction_value_pence']        = number_format($this->currency->getValue('GBP') * $order_info['total'],2,'.','')*100;
+		$data['order_number']                   = $order_info['order_id'];
+		$data['email_alert']                    = $this->config->get('payment_payatrader_email_alert');
+		$data['module_version']                 = $this->version;
 
 		$data['oc_version'] = VERSION;
 
@@ -67,6 +67,8 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 
 				if(isset($data['transaction_status']) && $data['transaction_status'] == 'A'){
 					$status = $this->model_extension_payment_payatrader->addTransaction($transaction);
+					$this->load->model('checkout/order');
+					$this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_payatrader_order_status_id'));
 				}
 			}
 		} else {
@@ -84,7 +86,7 @@ class ControllerExtensionPaymentPayatrader extends Controller {
 			/* print_r($transaction); */
 			if(isset($transaction['customer_transaction_id']) && $transaction['customer_transaction_id']){
 				$this->model_extension_payment_payatrader->deleteTransaction($transaction['customer_transaction_id']);
-				$this->model_checkout_order->addOrderHistory($ono, $this->config->get('payatrader_order_status_id'));
+				$this->model_checkout_order->addOrderHistory($ono, $this->config->get('payment_payatrader_order_status_id'));
 				$response = print_r($this->request->get,true);
 				$this->log->write('A Thanks Success Response for Payatrader:{{'.$response.'}}');
 				$this->response->redirect($this->url->link('checkout/success', '', 'SSL'));	
